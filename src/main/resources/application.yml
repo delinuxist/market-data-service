@@ -14,12 +14,17 @@ spring:
         globally_quoted_identifiers: true
         format_sql: true
     show-sql: true
+  data:
+    elasticsearch:
+      cluster-names: es-docker-cluster
+    data:
+      elasticsearch:
+        cluster-node: localhost:9200
+
 order-service:
   exchange:
     one: https://exchange.matraining.com/
     two: https://exchange2.matraining.com/
 
-# ELASTICSEARCH
-elasticsearch:
-  host: 127.0.0.1
-  port: 9200
+
+

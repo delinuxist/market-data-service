@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ExecutionDto {
-    private LocalDateTime timestamp;
-    private double price;
-    private int quantity;
-}
+public record ExecutionDto(
+     LocalDateTime timestamp,
+     double price,
+     int quantity
+){}

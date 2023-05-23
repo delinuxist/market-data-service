@@ -8,17 +8,18 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class OrderDto{
-    private String product;
-    private int quantity;
-    private double price;
-    private String side;
-    private List<ExecutionDto> executions;
-    private String orderType;
-    private int cumulativeQuantity;
-    private int cumulativePrice;
+
+
+public record OrderDto(
+        String product,
+        int quantity,
+        double price,
+        String side,
+        List<ExecutionDto> executions,
+        String orderType,
+        int cumulativeQuantity,
+        int cumulativePrice,
+        String exchangeUrl
+){
+
 }

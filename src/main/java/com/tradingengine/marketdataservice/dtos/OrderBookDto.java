@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
+
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class OrderBookDto {
-    private List<OrderDto> fullOrderBook;
-}
+public record OrderBookDto(
+     List<OrderDto> fullOrderBook
+){}
