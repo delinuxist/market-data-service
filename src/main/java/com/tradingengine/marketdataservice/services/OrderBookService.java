@@ -1,8 +1,8 @@
 package com.tradingengine.marketdataservice.services;
 
 import com.tradingengine.marketdataservice.models.OrderModel;
-import com.tradingengine.marketdataservice.models.Product;
-import com.tradingengine.marketdataservice.repositories.AppleRepository;
+
+import com.tradingengine.marketdataservice.repositories.OrderBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 public class OrderBookService {
 
     @Autowired
-    private AppleRepository appleRepository;
+    private OrderBookRepository orderBookRepository;
 
-    public Iterable<OrderModel> getOrderBooks() {
-        return appleRepository.findAll();
+    public Iterable<OrderModel> getAppleData() {
+        return orderBookRepository.findAll();
     }
+
 
 
 

@@ -1,4 +1,4 @@
-package com.tradingengine.marketdataservice.services;
+package com.tradingengine.marketdataservice.services.ExchangeOneService;
 
 import com.tradingengine.marketdataservice.dtos.OrderDto;
 import com.tradingengine.marketdataservice.integrations.ExchangeOneIntegration.*;
@@ -8,18 +8,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ExchangeOneOrderbook {
+public class ExchangeOneOrderBookService {
+    @Autowired
+    AmazonExchangeOneIntegration amazonExchangeOneIntegration;
+    @Autowired
+    AppleExchangeOneIntegration appleExchangeOneIntegration;
+    @Autowired
+    MicrosoftExchangeOneIntegration microsoftExchangeOneIntegration;
+    @Autowired
+    NetflixExchangeOneIntegration netflixExchangeOneIntegration;
+    @Autowired
+    OracleExchangeOneIntegration oracleExchangeOneIntegration;
+    @Autowired
+    TeslaExchangeOneIntegration teslaExchangeOneIntegration;
+    @Autowired
+    GoogleExchangeOneIntegration googleExchangeOneIntegration;
+    @Autowired
+    IBMExchangeOneIntegration ibmExchangeOneIntegration;
 
-    @Autowired
-    private AmazonExchangeOneIntegration amazonExchangeOneIntegration;
-    @Autowired
-    private AppleExchangeOneIntegration appleExchangeOneIntegration;
-    private MicrosoftExchangeOneIntegration microsoftExchangeOneIntegration;
-    private NetflixExchangeOneIntegration netflixExchangeOneIntegration;
-    private OracleExchangeOneIntegration oracleExchangeOneIntegration;
-    private TeslaExchangeOneIntegration teslaExchangeOneIntegration;
-    private GoogleExchangeOneIntegration googleExchangeOneIntegration;
-    private IBMExchangeOneIntegration ibmExchangeOneIntegration;
 
     public  List<OrderDto> getAppleData() {
         return appleExchangeOneIntegration.getOpenOrders();

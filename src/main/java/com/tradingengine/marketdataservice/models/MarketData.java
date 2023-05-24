@@ -12,18 +12,19 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(indexName = "orderbook")
-public class OrderModel {
-
+@Document(indexName = "marketdata")
+public class MarketData {
     @Id
     @GeneratedValue
     private String id;
-    private String product;
-    private int quantity;
-    private double price;
-    private String side;
-    private int cumulativeQuantity;
-    private double cumulativePrice;
-    private String orderType;
+    private String ticker;
+    private int sellLimit;
+    private double lastTradedPrice;
+    private double maxPriceShift;
+    private double askPrice;
+    private double bidPrice;
+    private int buyLimit;
     private String exchangeUrl;
+
 }
+

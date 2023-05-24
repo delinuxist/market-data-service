@@ -1,11 +1,9 @@
 package com.tradingengine.marketdataservice.repositories;
 
-import com.tradingengine.marketdataservice.models.Apple;
+import com.tradingengine.marketdataservice.models.Google;
 import com.tradingengine.marketdataservice.models.OrderModel;
-import com.tradingengine.marketdataservice.models.Product;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-public interface AppleRepository extends ElasticsearchRepository<Apple, String> {
+public interface GoogleRepository extends ElasticsearchRepository<Google, String> {
     void deleteAllByExchangeUrl(String url);
-
 }

@@ -12,8 +12,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(indexName = "orderbook")
-public class OrderModel {
+@Document(indexName = "apple")
+public class Apple {
 
     @Id
     @GeneratedValue

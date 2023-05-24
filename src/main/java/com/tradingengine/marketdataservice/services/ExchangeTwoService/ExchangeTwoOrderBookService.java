@@ -1,4 +1,4 @@
-package com.tradingengine.marketdataservice.services;
+package com.tradingengine.marketdataservice.services.ExchangeTwoService;
 
 import com.tradingengine.marketdataservice.dtos.OrderDto;
 import com.tradingengine.marketdataservice.integrations.ExchangeOneIntegration.*;
@@ -9,18 +9,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class LoadExchangeTwo {
+public class ExchangeTwoOrderBookService {
     @Autowired
     private AmazonExchangeTwoIntegration amazonExchangeTwoIntegration;
+    @Autowired
     private AppleExchangeTwoIntegration appleExchangeTwoIntegration;
+    @Autowired
     private MicrosoftExchangeTwoIntegration microsoftExchangeTwoIntegration;
+    @Autowired
     private NetflixExchangeTwoIntegration netflixExchangeTwoIntegration;
+    @Autowired
     private OracleExchangeTwoIntegration oracleExchangeTwoIntegration;
+    @Autowired
     private TeslaExchangeTwoIntegration teslaExchangeTwoIntegration;
+    @Autowired
     private GoogleExchangeTwoIntegration googleExchangeTwoIntegration;
+    @Autowired
     private IBMExchangeTwoIntegration ibmExchangeTwoIntegration;
 
-    public List<OrderDto> getAppleData() {
+    public  List<OrderDto> getAppleData() {
         return appleExchangeTwoIntegration.getOpenOrders();
     }
 
@@ -32,8 +39,7 @@ public class LoadExchangeTwo {
         return netflixExchangeTwoIntegration.getOpenOrders();
     }
 
-    public List<OrderDto> getOracleData() {
-        return oracleExchangeTwoIntegration.getOpenOrders();
+    public List<OrderDto> getOracleData() { return oracleExchangeTwoIntegration.getOpenOrders();
     }
 
     public List<OrderDto> getTeslaData() {
@@ -49,7 +55,7 @@ public class LoadExchangeTwo {
     }
 
     public List<OrderDto> getAmazonData() {
-        return appleExchangeTwoIntegration.getOpenOrders();
+        return amazonExchangeTwoIntegration.getOpenOrders();
     }
 
 }

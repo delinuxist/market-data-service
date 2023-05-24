@@ -8,13 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(indexName = "orderbook")
-public class OrderModel {
-
+@Document(indexName = "amazon")
+public class Amazon {
     @Id
     @GeneratedValue
     private String id;
