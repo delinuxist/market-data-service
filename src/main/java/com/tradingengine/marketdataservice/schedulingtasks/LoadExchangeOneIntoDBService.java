@@ -1,27 +1,36 @@
-package com.tradingengine.marketdataservice.services.ExchangeOneService;
+package com.tradingengine.marketdataservice.schedulingtasks;
 
 import com.tradingengine.marketdataservice.models.*;
 import com.tradingengine.marketdataservice.repositories.MarketDataRepository;
-import com.tradingengine.marketdataservice.services.OrderRepositoryService;
+import com.tradingengine.marketdataservice.services.ExchangeOneOrderBookService;
+import com.tradingengine.marketdataservice.services.GetOrderRepositoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-@Service
+@Component
+@Slf4j
+@EnableAsync
 public class LoadExchangeOneIntoDBService {
     @Autowired
     ExchangeOneOrderBookService exchangeOneOrderBookService;
     @Autowired
-    OrderRepositoryService orderRepositoryService;
-
-    @Autowired
-    ExchangeOneMarketDataService exchangeOneMarketDataService;
+    GetOrderRepositoryService getOrderRepositoryService;
 
     @Autowired
     MarketDataRepository marketDataRepository;
 
 
+
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getAppleTrades() {
         List<Apple> data = exchangeOneOrderBookService.getAppleData()
                 .parallelStream()
@@ -35,10 +44,14 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                  .toList();
-        orderRepositoryService.getAppleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getAppleRepository().saveAll(data);
+        getOrderRepositoryService.getAppleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getAppleRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Apple Orders Done!");
     }
 
+
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getAmazonTrades() {
         List<Amazon> data = exchangeOneOrderBookService.getAmazonData()
                 .parallelStream()
@@ -52,10 +65,13 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getAmazonRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getAmazonRepository().saveAll(data);
+        getOrderRepositoryService.getAmazonRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getAmazonRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Amazon Orders Done!");
     }
 
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getGoogleTrades() {
         List<Google> data = exchangeOneOrderBookService.getGoogleData()
                 .parallelStream()
@@ -69,10 +85,13 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getGoogleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getGoogleRepository().saveAll(data);
+        getOrderRepositoryService.getGoogleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getGoogleRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Google Orders Done!");
     }
 
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getTeslaTrades() {
         List<Tesla> data = exchangeOneOrderBookService.getTeslaData()
                 .parallelStream()
@@ -86,10 +105,13 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getTeslaRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getTeslaRepository().saveAll(data);
+        getOrderRepositoryService.getTeslaRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getTeslaRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Tesla Orders Done!");
     }
 
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getMicrosoftTrades() {
         List<Microsoft> data = exchangeOneOrderBookService.getMicrosoftData()
                 .parallelStream()
@@ -103,10 +125,13 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getMicrosoftRepository().saveAll(data);
+        getOrderRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getMicrosoftRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Tesla Orders Done!");
     }
 
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getIBMTrades() {
         List<IBM> data = exchangeOneOrderBookService.getIBMData()
                 .parallelStream()
@@ -120,10 +145,13 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getIbmRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getIbmRepository().saveAll(data);
+        getOrderRepositoryService.getIbmRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getIbmRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne IBM Orders Done!");
     }
 
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getOracleTrades() {
         List<Oracle> data = exchangeOneOrderBookService.getOracleData()
                 .parallelStream()
@@ -137,10 +165,13 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getOracleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getOracleRepository().saveAll(data);
+        getOrderRepositoryService.getOracleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getOracleRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Oracle Orders Done!");
     }
 
+    @Async
+    @Scheduled(fixedRate =  20 ,timeUnit = TimeUnit.SECONDS)
     public void getNetflixTrades() {
         List<Netflix> data = exchangeOneOrderBookService.getNetflixData()
                 .parallelStream()
@@ -154,12 +185,14 @@ public class LoadExchangeOneIntoDBService {
                         .orderType(order.orderType())
                         .exchangeUrl("https//exchange.matraining.com").build())
                 .toList();
-        orderRepositoryService.getNetflixRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
-        orderRepositoryService.getNetflixRepository().saveAll(data);
+        getOrderRepositoryService.getNetflixRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getNetflixRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Netflix Orders Done!");
     }
-
+    @Async
+    @Scheduled(fixedRate = 20 ,timeUnit = TimeUnit.SECONDS)
     public void getMarketData() {
-          List<MarketData>  marketData = exchangeOneMarketDataService.getMarketData()
+          List<MarketData>  marketData = exchangeOneOrderBookService.getMarketData()
                     .parallelStream()
                     .map(data -> MarketData
                             .builder()
@@ -175,6 +208,7 @@ public class LoadExchangeOneIntoDBService {
                     ).toList();
           marketDataRepository.deleteAllByExchangeUrl("https//exchange.matraining.com");
           marketDataRepository.saveAll(marketData);
+        log.info("Cron job for ExchangeOne MarketData Orders Done!");
     }
 
 

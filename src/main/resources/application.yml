@@ -20,11 +20,15 @@ spring:
     data:
       elasticsearch:
         cluster-node: localhost:9200
-
+  task:
+    scheduling:
+      pool:
+        size=10:
 order-service:
   exchange:
     one: https://exchange.matraining.com/
     two: https://exchange2.matraining.com/
+
 
 
 

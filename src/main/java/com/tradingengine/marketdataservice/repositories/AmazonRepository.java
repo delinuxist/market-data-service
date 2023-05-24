@@ -1,7 +1,6 @@
 package com.tradingengine.marketdataservice.repositories;
 
 import com.tradingengine.marketdataservice.models.Amazon;
-import com.tradingengine.marketdataservice.models.OrderModel;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 public interface AmazonRepository extends ElasticsearchRepository<Amazon, String> {
