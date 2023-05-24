@@ -1,5 +1,6 @@
 package com.tradingengine.marketdataservice.schedulingtasks;
 
+import com.tradingengine.marketdataservice.integrations.ExchangeUrls;
 import com.tradingengine.marketdataservice.models.*;;
 import com.tradingengine.marketdataservice.repositories.MarketDataRepository;
 import com.tradingengine.marketdataservice.services.ExchangeTwoOrderBookService;
@@ -123,9 +124,9 @@ public class LoadExchangeTwoIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange2.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl("https//exchange2.matraining.com");
+        getOrderRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         getOrderRepositoryService.getMicrosoftRepository().saveAll(data);
         log.info("Cron job for ExchangeTwo Microsoft Orders Done!");
     }
@@ -143,9 +144,9 @@ public class LoadExchangeTwoIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange2.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getIbmRepository().deleteAllByExchangeUrl("https//exchange2.matraining.com");
+        getOrderRepositoryService.getIbmRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         getOrderRepositoryService.getIbmRepository().saveAll(data);
         log.info("Cron job for ExchangeTwo IBM Orders Done!");
     }
@@ -163,9 +164,9 @@ public class LoadExchangeTwoIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange2.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getOracleRepository().deleteAllByExchangeUrl("https//exchange2.matraining.com");
+        getOrderRepositoryService.getOracleRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         getOrderRepositoryService.getOracleRepository().saveAll(data);
         log.info("Cron job for ExchangeTwo Oracle Orders Done!");
     }
@@ -183,9 +184,9 @@ public class LoadExchangeTwoIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange2.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getNetflixRepository().deleteAllByExchangeUrl("https//exchange2.matraining.com");
+        getOrderRepositoryService.getNetflixRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         getOrderRepositoryService.getNetflixRepository().saveAll(data);
         log.info("Cron job for ExchangeTwo Netflix Orders Done!");
     }
@@ -204,10 +205,10 @@ public class LoadExchangeTwoIntoDBService {
                         .askPrice(data.ASK_PRICE())
                         .bidPrice(data.BID_PRICE())
                         .buyLimit(data.BUY_LIMIT())
-                        .exchangeUrl("https//exchange2.matraining.com")
+                        .exchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl())
                         .build()
                 ).toList();
-        marketDataRepository.deleteAllByExchangeUrl("https//exchange2.matraining.com");
+        marketDataRepository.deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         marketDataRepository.saveAll(marketData);
         log.info("Cron job for ExchangeTwo MarketData Orders Done!");
     }

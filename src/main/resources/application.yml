@@ -24,10 +24,7 @@ spring:
     scheduling:
       pool:
         size=10:
-order-service:
-  exchange:
-    one: https://exchange.matraining.com/
-    two: https://exchange2.matraining.com/
+
 
 
 

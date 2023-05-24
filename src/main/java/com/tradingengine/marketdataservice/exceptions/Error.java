@@ -3,37 +3,23 @@ package com.tradingengine.marketdataservice.exceptions;
 
 import org.apache.logging.log4j.util.Strings;
 
-/**
- * Error
- * <p>
- * Complex type that contains error details for a REST API calls.
- */
+
 public class Error {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * App error code, which is different from HTTP error code.
-     */
+
     private String errorCode;
 
-    /**
-     * Short, human-readable summary of the problem.
-     */
+
     private String message;
 
-    /**
-     * HTTP status code.
-     */
+
     private Integer status;
 
-    /**
-     * Url of request that produced the error.
-     */
+
     private String url = "Not available";
 
-    /**
-     * Method of request that produced the error.
-     */
+
     private String reqMethod = "Not available";
 
     public String getErrorCode() {

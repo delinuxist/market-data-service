@@ -1,5 +1,6 @@
 package com.tradingengine.marketdataservice.schedulingtasks;
 
+import com.tradingengine.marketdataservice.integrations.ExchangeUrls;
 import com.tradingengine.marketdataservice.models.*;
 import com.tradingengine.marketdataservice.repositories.MarketDataRepository;
 import com.tradingengine.marketdataservice.services.ExchangeOneOrderBookService;
@@ -42,9 +43,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                  .toList();
-        getOrderRepositoryService.getAppleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getAppleRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getAppleRepository().saveAll(data);
         log.info("Cron job for ExchangeOne Apple Orders Done!");
     }
@@ -63,9 +64,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getAmazonRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getAmazonRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getAmazonRepository().saveAll(data);
         log.info("Cron job for ExchangeOne Amazon Orders Done!");
     }
@@ -83,9 +84,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getGoogleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getGoogleRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getGoogleRepository().saveAll(data);
         log.info("Cron job for ExchangeOne Google Orders Done!");
     }
@@ -103,9 +104,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getTeslaRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getTeslaRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getTeslaRepository().saveAll(data);
         log.info("Cron job for ExchangeOne Tesla Orders Done!");
     }
@@ -123,9 +124,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getMicrosoftRepository().saveAll(data);
         log.info("Cron job for ExchangeOne Tesla Orders Done!");
     }
@@ -143,9 +144,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getIbmRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getIbmRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getIbmRepository().saveAll(data);
         log.info("Cron job for ExchangeOne IBM Orders Done!");
     }
@@ -163,7 +164,7 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
         getOrderRepositoryService.getOracleRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
         getOrderRepositoryService.getOracleRepository().saveAll(data);
@@ -183,9 +184,9 @@ public class LoadExchangeOneIntoDBService {
                         .price(order.price())
                         .side(order.side())
                         .orderType(order.orderType())
-                        .exchangeUrl("https//exchange.matraining.com").build())
+                        .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl()).build())
                 .toList();
-        getOrderRepositoryService.getNetflixRepository().deleteAllByExchangeUrl("https//exchange.matraining.com");
+        getOrderRepositoryService.getNetflixRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
         getOrderRepositoryService.getNetflixRepository().saveAll(data);
         log.info("Cron job for ExchangeOne Netflix Orders Done!");
     }
@@ -203,10 +204,10 @@ public class LoadExchangeOneIntoDBService {
                             .askPrice(data.ASK_PRICE())
                             .bidPrice(data.BID_PRICE())
                             .buyLimit(data.BUY_LIMIT())
-                            .exchangeUrl("https//exchange.matraining.com")
+                            .exchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl())
                             .build()
                     ).toList();
-          marketDataRepository.deleteAllByExchangeUrl("https//exchange.matraining.com");
+          marketDataRepository.deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
           marketDataRepository.saveAll(marketData);
         log.info("Cron job for ExchangeOne MarketData Orders Done!");
     }

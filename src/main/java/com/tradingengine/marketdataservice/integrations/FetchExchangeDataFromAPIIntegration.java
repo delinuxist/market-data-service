@@ -11,11 +11,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Component
-public class FetchExchangeDataFromAPI {
+public class FetchExchangeDataFromAPIIntegration {
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
 
-    public FetchExchangeDataFromAPI(RestTemplate restTemplate, ObjectMapper mapper) {
+    public FetchExchangeDataFromAPIIntegration(RestTemplate restTemplate, ObjectMapper mapper) {
         this.restTemplate = restTemplate;
         this.mapper = mapper;
     }

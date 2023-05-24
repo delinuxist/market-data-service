@@ -1,21 +1,12 @@
 package com.tradingengine.marketdataservice.exceptions;
 
-/**
- * Creation of Error related to REST API calls
- */
+
 public class ErrorUtils {
 
     private ErrorUtils() {
     }
 
-    /**
-     * Creates and return an error object
-     *
-     * @param errMsgKey
-     * @param errorCode
-     * @param httpStatusCode
-     * @return error
-     */
+
 
     public static Error createError(final String errMsgKey, final String errorCode,
                                     final Integer httpStatusCode) {
