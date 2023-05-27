@@ -8,22 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Document(indexName = "apple")
-public class Apple {
 
-    @Id
-    @GeneratedValue
-    private String id;
-    private String product;
-    private int quantity;
-    private double price;
-    private String side;
-    private int cumulativeQuantity;
-    private double cumulativePrice;
-    private String orderType;
-    private String exchangeUrl;
+@Document(indexName = "apple")
+public class Apple extends Product{
+    public Apple() {
+        super();
+    }
+
+    public Apple(String product, int quantity, double price, String side, String orderType, String exchangeUrl) {
+        super(product, quantity, price, side, orderType, exchangeUrl);
+    }
 }

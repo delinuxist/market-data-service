@@ -6,8 +6,6 @@ public class ErrorUtils {
     private ErrorUtils() {
     }
 
-
-
     public static Error createError(final String errMsgKey, final String errorCode,
                                     final Integer httpStatusCode) {
         Error error = new Error();

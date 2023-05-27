@@ -9,21 +9,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+
 @Document(indexName = "oracle")
-public class Oracle {
-    @Id
-    @GeneratedValue
-    private String id;
-    private String product;
-    private int quantity;
-    private double price;
-    private String side;
-    private int cumulativeQuantity;
-    private double cumulativePrice;
-    private String orderType;
-    private String exchangeUrl;
+public class Oracle extends Product{
+    public Oracle() {
+        super();
+    }
+
+    public Oracle(String product, int quantity, double price, String side, String orderType, String exchangeUrl) {
+        super(product, quantity, price, side, orderType, exchangeUrl);
+    }
 }

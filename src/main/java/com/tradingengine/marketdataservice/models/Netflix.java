@@ -9,22 +9,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Document(indexName = "netflix")
-public class Netflix {
+public class Netflix extends Product{
 
-    @Id
-    @GeneratedValue
-    private String id;
-    private String product;
-    private int quantity;
-    private double price;
-    private String side;
-    private int cumulativeQuantity;
-    private double cumulativePrice;
-    private String orderType;
-    private String exchangeUrl;
+    public Netflix() {
+        super();
+    }
+
+    public Netflix(String product, int quantity, double price, String side, String orderType, String exchangeUrl) {
+        super(product, quantity, price, side, orderType, exchangeUrl);
+    }
 }

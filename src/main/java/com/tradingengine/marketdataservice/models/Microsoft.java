@@ -10,21 +10,13 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Document(indexName = "microsoft")
-public class Microsoft {
-    @Id
-    @GeneratedValue
-    private String id;
-    private String product;
-    private int quantity;
-    private double price;
-    private String side;
-    private int cumulativeQuantity;
-    private double cumulativePrice;
-    private String orderType;
-    private String exchangeUrl;
+public class Microsoft extends Product{
+    public Microsoft() {
+        super();
+    }
+
+    public Microsoft(String product, int quantity, double price, String side, String orderType, String exchangeUrl) {
+        super(product, quantity, price, side, orderType, exchangeUrl);
+    }
 }

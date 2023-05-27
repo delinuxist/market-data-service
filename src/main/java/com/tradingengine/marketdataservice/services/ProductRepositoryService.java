@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetOrderRepositoryService {
+public class ProductRepositoryService {
     @Autowired
     private AppleRepository appleRepository;
 
@@ -30,6 +30,7 @@ public class GetOrderRepositoryService {
 
     @Autowired
     private NetflixRepository netflixRepository;
+
 
     public AppleRepository getAppleRepository() {
         return appleRepository;

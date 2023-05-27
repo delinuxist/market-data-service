@@ -1,9 +1,10 @@
 package com.tradingengine.marketdataservice.services;
 
+import com.tradingengine.marketdataservice.constants.ProductType;
 import com.tradingengine.marketdataservice.dtos.MarketDataDto;
-import com.tradingengine.marketdataservice.dtos.OrderDto;
-import com.tradingengine.marketdataservice.integrations.ExchangeUrls;
-import com.tradingengine.marketdataservice.integrations.FetchExchangeDataFromAPIIntegration;
+import com.tradingengine.marketdataservice.dtos.ProductDto;
+import com.tradingengine.marketdataservice.constants.ExchangeUrls;
+import com.tradingengine.marketdataservice.integrations.FetchExchangeDataFromAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,43 +13,43 @@ import java.util.List;
 @Service
 public class ExchangeOneOrderBookService {
     @Autowired
-    FetchExchangeDataFromAPIIntegration fetchExchangeDataFromAPIIntegration;
+    FetchExchangeDataFromAPI fetchExchangeDataFromAPI;
 
 
-    public  List<OrderDto> getAppleData() {
-        return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.AppleExchangeOne.getUrl());
+    public  List<ProductDto> getAppleData() {
+        return fetchExchangeDataFromAPI.getOpenOrders(ProductType.APPLE.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getMicrosoftData() {
-        return  fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.MicrosoftExchangeOne.getUrl());
+    public List<ProductDto> getMicrosoftData() {
+        return  fetchExchangeDataFromAPI.getOpenOrders(ProductType.MICROSOFT.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getNetflixData() {
-       return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.NetflixExchangeOne.getUrl());
+    public List<ProductDto> getNetflixData() {
+       return fetchExchangeDataFromAPI.getOpenOrders(ProductType.NETFLIX.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getOracleData() {
-        return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.OracleExchangeOne.getUrl());
+    public List<ProductDto> getOracleData() {
+        return fetchExchangeDataFromAPI.getOpenOrders(ProductType.ORACLE.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getTeslaData() {
-        return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.TeslaExchangeOne.getUrl());
+    public List<ProductDto> getTeslaData() {
+        return fetchExchangeDataFromAPI.getOpenOrders(ProductType.TESLA.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getIBMData() {
-        return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.IBMExchangeOne.getUrl());
+    public List<ProductDto> getIBMData() {
+        return fetchExchangeDataFromAPI.getOpenOrders(ProductType.IBM.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getGoogleData() {
-        return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.GoogleExchangeOne.getUrl());
+    public List<ProductDto> getGoogleData() {
+        return fetchExchangeDataFromAPI.getOpenOrders(ProductType.GOOGLE.getExchangeOneUrl());
     }
 
-    public List<OrderDto> getAmazonData() {
-        return fetchExchangeDataFromAPIIntegration.getOpenOrders(ExchangeUrls.AmazonExchangeOne.getUrl());
+    public List<ProductDto> getAmazonData() {
+        return fetchExchangeDataFromAPI.getOpenOrders(ProductType.AMAZON.getExchangeOneUrl());
     }
 
     public List<MarketDataDto> getMarketData() {
-        return fetchExchangeDataFromAPIIntegration.getMarketData(ExchangeUrls.ExchangeOneProductsUrl.getUrl());
+        return fetchExchangeDataFromAPI.getMarketData(ExchangeUrls.ExchangeOneProductsUrl.getUrl());
     }
 
 }
