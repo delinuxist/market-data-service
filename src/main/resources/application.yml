@@ -1,5 +1,28 @@
 spring:
   application:
-    name: market-data-service
-  config:
-    import: optional:configserver:http://localhost:8080
+    name: market-data
+  datasource:
+    url: jdbc:postgresql://localhost:5332/marketdb
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        globally_quoted_identifiers: true
+        format_sql: true
+    show-sql: true
+  data:
+    elasticsearch:
+      cluster-names: es-docker-cluster
+    data:
+      elasticsearch:
+        cluster-node: localhost:9200
+
+
+
+
+
+
