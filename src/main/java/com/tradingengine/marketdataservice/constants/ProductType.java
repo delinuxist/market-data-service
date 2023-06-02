@@ -20,11 +20,11 @@ public enum ProductType {
             "https://exchange.matraining.com/orderbook/ORCL/open",
             "https://exchange2.matraining.com/orderbook/ORCL/open"),
     NETFLIX(
-            "https://exchange.matraining.com/orderbook/ORCL/open",
-            "https://exchange2.matraining.com/orderbook/ORCL/open"),
+            "https://exchange.matraining.com/orderbook/NFLX/open",
+            "https://exchange2.matraining.com/orderbook/NFLX/open"),
     MICROSOFT(
-            "https://exchange.matraining.com/orderbook/ORCL/open",
-            "https://exchange2.matraining.com/orderbook/ORCL/open");
+            "https://exchange.matraining.com/orderbook/MSFT/open",
+            "https://exchange2.matraining.com/orderbook/MSFT/open");
 
     private final String exchangeOneUrl;
 

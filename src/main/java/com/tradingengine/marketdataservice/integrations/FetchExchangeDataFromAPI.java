@@ -14,10 +14,10 @@ import java.util.List;
 @Component
 public class FetchExchangeDataFromAPI {
     private final RestTemplate restTemplate;
-    private final ObjectMapper mapper;
-    public FetchExchangeDataFromAPI(RestTemplate restTemplate, ObjectMapper mapper) {
+
+    public FetchExchangeDataFromAPI(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.mapper = mapper;
+
     }
 
     public List<ProductDto> getOpenOrders(String exchangeUrl) {

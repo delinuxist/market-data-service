@@ -9,18 +9,21 @@ services:
     volumes:
       - /var/lib/postgres
     ports:
-      - "5332:5432"
+      - "5432:5432"
     networks:
       - db
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
     container_name: elasticsearch
     volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
+      - elasticsearch-data:/usr/share/elasticsearch/newdata
     ports:
       - 9200:9200
     environment:
+      - ELASTIC_USERNAME=elastic
+
+      - ELASTIC_PASSWORD=changeme
       - xpack.security.enabled=false
       - discovery.type=single-node
     ulimits:

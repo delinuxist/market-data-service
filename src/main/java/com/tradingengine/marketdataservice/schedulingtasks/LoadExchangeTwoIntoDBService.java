@@ -95,7 +95,7 @@ public class LoadExchangeTwoIntoDBService {
                         order.price(),
                         order.side(),
                         order.orderType(),
-                        ExchangeUrls.ExchangeOneUrl.getUrl()))
+                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
                 .toList();
         productRepositoryService.getTeslaRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         productRepositoryService.getTeslaRepository().saveAll(data);
@@ -103,23 +103,23 @@ public class LoadExchangeTwoIntoDBService {
     }
 
 
-    @Scheduled(cron = "*/30 * * * * *")
-    public void getMicrosoftTrades() {
-        List<Microsoft> data = exchangeTwoOrderBookService.getMicrosoftData()
-                .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
-                .map(order -> new Microsoft(
-                        order.product(),
-                        order.quantity(),
-                        order.price(),
-                        order.side(),
-                        order.orderType(),
-                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
-                .toList();
-        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
-        productRepositoryService.getMicrosoftRepository().saveAll(data);
-        log.info("Cron job for ExchangeTwo Microsoft Orders Done!");
-    }
+//    @Scheduled(cron = "*/30 * * * * *")
+//    public void getMicrosoftTrades() {
+//        List<Microsoft> data = exchangeTwoOrderBookService.getMicrosoftData()
+//                .parallelStream()
+//                .filter(order -> order.quantity() > order.cumulativeQuantity())
+//                .map(order -> new Microsoft(
+//                        order.product(),
+//                        order.quantity(),
+//                        order.price(),
+//                        order.side(),
+//                        order.orderType(),
+//                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
+//                .toList();
+//        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
+//        productRepositoryService.getMicrosoftRepository().saveAll(data);
+//        log.info("Cron job for ExchangeTwo Microsoft Orders Done!");
+//    }
 
 
     @Scheduled(cron = "*/30 * * * * *")
@@ -188,7 +188,7 @@ public class LoadExchangeTwoIntoDBService {
                         .ticker(data.TICKER())
                         .sellLimit(data.SELL_LIMIT())
                         .lastTradedPrice(data.LAST_TRADED_PRICE())
-                        .maxPriceShift(data.MAX_PRICE())
+                        .maxPriceShift(data.MAX_PRICE_SHIFT())
                         .askPrice(data.ASK_PRICE())
                         .bidPrice(data.BID_PRICE())
                         .buyLimit(data.BUY_LIMIT())

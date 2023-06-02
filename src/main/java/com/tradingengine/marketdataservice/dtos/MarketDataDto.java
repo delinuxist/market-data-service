@@ -5,7 +5,7 @@ public record MarketDataDto (
      String TICKER,
      int SELL_LIMIT,
      double LAST_TRADED_PRICE,
-     double MAX_PRICE,
+     double MAX_PRICE_SHIFT,
      double ASK_PRICE,
      double BID_PRICE,
      int BUY_LIMIT

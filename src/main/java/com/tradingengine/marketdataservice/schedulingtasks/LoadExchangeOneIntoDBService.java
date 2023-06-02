@@ -4,7 +4,9 @@ package com.tradingengine.marketdataservice.schedulingtasks;
 import com.tradingengine.marketdataservice.constants.ExchangeUrls;
 import com.tradingengine.marketdataservice.models.*;
 import com.tradingengine.marketdataservice.repositories.MarketDataRepository;
+import com.tradingengine.marketdataservice.repositories.MicrosoftRepository;
 import com.tradingengine.marketdataservice.services.ExchangeOneOrderBookService;
+import com.tradingengine.marketdataservice.services.ExchangeTwoOrderBookService;
 import com.tradingengine.marketdataservice.services.ProductRepositoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,17 @@ import java.util.List;
 public class LoadExchangeOneIntoDBService {
     @Autowired
     ExchangeOneOrderBookService exchangeOneOrderBookService;
+
+    @Autowired
+    ExchangeTwoOrderBookService exchangeTwoOrderBookService;
     @Autowired
     ProductRepositoryService productRepositoryService;
 
     @Autowired
     MarketDataRepository marketDataRepository;
+
+    @Autowired
+    MicrosoftRepository repository;
 
 
     @Scheduled(cron = "*/30 * * * * *")
@@ -100,7 +108,7 @@ public class LoadExchangeOneIntoDBService {
         log.info("Cron job for ExchangeOne Tesla Orders Done!");
     }
 
-    @Scheduled(cron = "*/30 * * * * *")
+    @Scheduled(cron = "*/40 * * * * *")
     public void getMicrosoftTrades() {
         List<Microsoft> data = exchangeOneOrderBookService.getMicrosoftData()
                 .parallelStream()
@@ -113,9 +121,24 @@ public class LoadExchangeOneIntoDBService {
                         order.orderType(),
                         ExchangeUrls.ExchangeOneUrl.getUrl()))
                 .toList();
-        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
-        productRepositoryService.getMicrosoftRepository().saveAll(data);
-        log.info("Cron job for ExchangeOne Tesla Orders Done!");
+        repository.deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
+        repository.saveAll(data);
+        log.info("Cron job for ExchangeOne Microsoft Orders Done!");
+
+        List<Microsoft> data2 = exchangeTwoOrderBookService.getMicrosoftData()
+                .parallelStream()
+                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .map(order -> new Microsoft(
+                        order.product(),
+                        order.quantity(),
+                        order.price(),
+                        order.side(),
+                        order.orderType(),
+                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
+                .toList();
+        repository.deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
+        repository.saveAll(data2);
+        log.info("Cron job for ExchangeTwo Microsoft Orders Done!");
     }
 
     @Scheduled(cron = "*/30 * * * * *")
@@ -181,7 +204,7 @@ public class LoadExchangeOneIntoDBService {
                             .ticker(data.TICKER())
                             .sellLimit(data.SELL_LIMIT())
                             .lastTradedPrice(data.LAST_TRADED_PRICE())
-                            .maxPriceShift(data.MAX_PRICE())
+                            .maxPriceShift(data.MAX_PRICE_SHIFT())
                             .askPrice(data.ASK_PRICE())
                             .bidPrice(data.BID_PRICE())
                             .buyLimit(data.BUY_LIMIT())
