@@ -9,12 +9,12 @@ services:
     volumes:
       - /var/lib/postgres
     ports:
-      - "5432:5432"
+      - "5332:5432"
     networks:
       - db
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     container_name: elasticsearch
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/newdata

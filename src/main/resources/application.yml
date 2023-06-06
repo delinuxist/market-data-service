@@ -3,7 +3,7 @@ spring:
     name: market-data
   datasource:
     username: postgres
-    url: jdbc:postgresql://localhost:5332/orderdb
+    url: jdbc:postgresql://localhost:5332/market
     password: password
   jpa:
     hibernate:

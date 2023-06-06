@@ -12,9 +12,8 @@ public record ProductDto(
         String side,
         List<ExecutionDto> executions,
         String orderType,
-        int cumulativeQuantity,
-        int cumulativePrice,
-        String exchangeUrl
+        int cumulatitiveQuantity,
+        int cumulatitivePrice
 ){
 
 }

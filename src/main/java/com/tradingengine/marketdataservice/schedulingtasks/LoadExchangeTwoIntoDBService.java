@@ -22,16 +22,49 @@ public class LoadExchangeTwoIntoDBService {
     ExchangeTwoOrderBookService exchangeTwoOrderBookService;
     @Autowired
     ProductRepositoryService productRepositoryService;
-
-
     @Autowired
     MarketDataRepository marketDataRepository;
+    @Scheduled(cron = "*/30 * * * * *")
+    public void getMicrosoftTrades() {
+        List<Microsoft> data = exchangeTwoOrderBookService.getMicrosoftData()
+                .parallelStream()
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
+                .map(order -> new Microsoft(
+                        order.product(),
+                        order.quantity(),
+                        order.price(),
+                        order.side(),
+                        order.orderType(),
+                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
+                .toList();
+        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
+        productRepositoryService.getMicrosoftRepository().saveAll(data);
+        log.info("Cron job for ExchangeTwo Microsoft Orders Done!");
+    }
+
+    @Scheduled(cron = "*/30 * * * * *")
+    public void getNetflixTrades() {
+        List<Netflix> data = exchangeTwoOrderBookService.getNetflixData()
+                .parallelStream()
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
+                .map(order -> new Netflix(
+                        order.product(),
+                        order.quantity(),
+                        order.price(),
+                        order.side(),
+                        order.orderType(),
+                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
+                .toList();
+        productRepositoryService.getNetflixRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
+        productRepositoryService.getNetflixRepository().saveAll(data);
+        log.info("Cron job for ExchangeTwo Netflix Orders Done!");
+    }
 
     @Scheduled(cron = "*/30 * * * * *")
     public void getAppleTrades() {
         List<Apple> data = exchangeTwoOrderBookService.getAppleData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Apple(
                         order.product(),
                         order.quantity(),
@@ -50,7 +83,7 @@ public class LoadExchangeTwoIntoDBService {
     public void getAmazonTrades() {
         List<Amazon> data = exchangeTwoOrderBookService.getAmazonData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Amazon(
                         order.product(),
                         order.quantity(),
@@ -63,20 +96,20 @@ public class LoadExchangeTwoIntoDBService {
         productRepositoryService.getAmazonRepository().saveAll(data);
         log.info("Cron job for ExchangeTwo Amazon Orders Done!");
     }
-
-
+//
+//
     @Scheduled(cron = "*/30 * * * * *")
     public void getGoogleTrades() {
         List<Google> data = exchangeTwoOrderBookService.getGoogleData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order ->new Google(
                         order.product(),
                         order.quantity(),
                         order.price(),
                         order.side(),
                         order.orderType(),
-                        ExchangeUrls.ExchangeOneUrl.getUrl()))
+                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
                 .toList();
         productRepositoryService.getGoogleRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         productRepositoryService.getGoogleRepository().saveAll(data);
@@ -88,7 +121,7 @@ public class LoadExchangeTwoIntoDBService {
     public void getTeslaTrades() {
         List<Tesla> data = exchangeTwoOrderBookService.getTeslaData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Tesla(
                         order.product(),
                         order.quantity(),
@@ -103,37 +136,19 @@ public class LoadExchangeTwoIntoDBService {
     }
 
 
-//    @Scheduled(cron = "*/30 * * * * *")
-//    public void getMicrosoftTrades() {
-//        List<Microsoft> data = exchangeTwoOrderBookService.getMicrosoftData()
-//                .parallelStream()
-//                .filter(order -> order.quantity() > order.cumulativeQuantity())
-//                .map(order -> new Microsoft(
-//                        order.product(),
-//                        order.quantity(),
-//                        order.price(),
-//                        order.side(),
-//                        order.orderType(),
-//                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
-//                .toList();
-//        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
-//        productRepositoryService.getMicrosoftRepository().saveAll(data);
-//        log.info("Cron job for ExchangeTwo Microsoft Orders Done!");
-//    }
-
 
     @Scheduled(cron = "*/30 * * * * *")
     public void getIBMTrades() {
         List<IBM> data = exchangeTwoOrderBookService.getIBMData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new IBM(
                         order.product(),
                         order.quantity(),
                         order.price(),
                         order.side(),
                         order.orderType(),
-                        ExchangeUrls.ExchangeOneUrl.getUrl()))
+                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
                 .toList();
         productRepositoryService.getIbmRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
         productRepositoryService.getIbmRepository().saveAll(data);
@@ -145,7 +160,7 @@ public class LoadExchangeTwoIntoDBService {
     public void getOracleTrades() {
         List<Oracle> data = exchangeTwoOrderBookService.getOracleData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Oracle(
                         order.product(),
                         order.quantity(),
@@ -160,23 +175,7 @@ public class LoadExchangeTwoIntoDBService {
     }
 
 
-    @Scheduled(cron = "*/30 * * * * *")
-    public void getNetflixTrades() {
-        List<Netflix> data = exchangeTwoOrderBookService.getNetflixData()
-                .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
-                .map(order -> new Netflix(
-                        order.product(),
-                        order.quantity(),
-                        order.price(),
-                        order.side(),
-                        order.orderType(),
-                        ExchangeUrls.ExchangeTwoUrl.getUrl()))
-                .toList();
-        productRepositoryService.getNetflixRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeTwoUrl.getUrl());
-        productRepositoryService.getNetflixRepository().saveAll(data);
-        log.info("Cron job for ExchangeTwo Netflix Orders Done!");
-    }
+
 
 
     @Scheduled(cron = "*/30 * * * * *")
