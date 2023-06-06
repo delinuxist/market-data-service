@@ -2,8 +2,8 @@ spring:
   application:
     name: market-data
   datasource:
-    url: jdbc:postgresql://localhost:5332/marketdb
     username: postgres
+    url: jdbc:postgresql://localhost:5332/market
     password: password
   jpa:
     hibernate:
@@ -20,7 +20,8 @@ spring:
     data:
       elasticsearch:
         cluster-node: localhost:9200
-
+server:
+  port: 9090
 
 
 

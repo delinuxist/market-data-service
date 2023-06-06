@@ -4,7 +4,9 @@ package com.tradingengine.marketdataservice.schedulingtasks;
 import com.tradingengine.marketdataservice.constants.ExchangeUrls;
 import com.tradingengine.marketdataservice.models.*;
 import com.tradingengine.marketdataservice.repositories.MarketDataRepository;
+import com.tradingengine.marketdataservice.repositories.MicrosoftRepository;
 import com.tradingengine.marketdataservice.services.ExchangeOneOrderBookService;
+import com.tradingengine.marketdataservice.services.ExchangeTwoOrderBookService;
 import com.tradingengine.marketdataservice.services.ProductRepositoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +23,52 @@ public class LoadExchangeOneIntoDBService {
     ExchangeOneOrderBookService exchangeOneOrderBookService;
     @Autowired
     ProductRepositoryService productRepositoryService;
-
     @Autowired
     MarketDataRepository marketDataRepository;
+
+
+    @Scheduled(cron = "*/30 * * * * *")
+    public void getMicrosoftTrades() {
+        List<Microsoft> data = exchangeOneOrderBookService.getMicrosoftData()
+                .parallelStream()
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
+                .map(order -> new Microsoft(
+                        order.product(),
+                        order.quantity(),
+                        order.price(),
+                        order.side(),
+                        order.orderType(),
+                        ExchangeUrls.ExchangeOneUrl.getUrl()))
+                .toList();
+        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
+        productRepositoryService.getMicrosoftRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Microsoft Orders Done!");
+    }
+
+        @Scheduled(cron = "*/30 * * * * *")
+    public void getNetflixTrades() {
+        List<Netflix> data = exchangeOneOrderBookService.getNetflixData()
+                .parallelStream()
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
+                .map(order -> new Netflix(
+                        order.product(),
+                        order.quantity(),
+                        order.price(),
+                        order.side(),
+                        order.orderType(),
+                        ExchangeUrls.ExchangeOneUrl.getUrl()))
+                .toList();
+        productRepositoryService.getNetflixRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
+        productRepositoryService.getNetflixRepository().saveAll(data);
+        log.info("Cron job for ExchangeOne Netflix Orders Done!");
+    }
 
 
     @Scheduled(cron = "*/30 * * * * *")
     public void getAppleTrades() {
         List<Apple> data = exchangeOneOrderBookService.getAppleData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order ->new Apple(
                         order.product(),
                         order.quantity(),
@@ -49,7 +87,7 @@ public class LoadExchangeOneIntoDBService {
     public void getAmazonTrades() {
         List<Amazon> data = exchangeOneOrderBookService.getAmazonData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Amazon(
                         order.product(),
                         order.quantity(),
@@ -67,7 +105,7 @@ public class LoadExchangeOneIntoDBService {
     public void getGoogleTrades() {
         List<Google> data = exchangeOneOrderBookService.getGoogleData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Google(
                         order.product(),
                         order.quantity(),
@@ -86,7 +124,7 @@ public class LoadExchangeOneIntoDBService {
     public void getTeslaTrades() {
         List<Tesla> data = exchangeOneOrderBookService.getTeslaData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Tesla(
                         order.product(),
                         order.quantity(),
@@ -101,28 +139,10 @@ public class LoadExchangeOneIntoDBService {
     }
 
     @Scheduled(cron = "*/30 * * * * *")
-    public void getMicrosoftTrades() {
-        List<Microsoft> data = exchangeOneOrderBookService.getMicrosoftData()
-                .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
-                .map(order -> new Microsoft(
-                        order.product(),
-                        order.quantity(),
-                        order.price(),
-                        order.side(),
-                        order.orderType(),
-                        ExchangeUrls.ExchangeOneUrl.getUrl()))
-                .toList();
-        productRepositoryService.getMicrosoftRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
-        productRepositoryService.getMicrosoftRepository().saveAll(data);
-        log.info("Cron job for ExchangeOne Tesla Orders Done!");
-    }
-
-    @Scheduled(cron = "*/30 * * * * *")
     public void getIBMTrades() {
         List<IBM> data = exchangeOneOrderBookService.getIBMData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new IBM(
                         order.product(),
                         order.quantity(),
@@ -140,7 +160,7 @@ public class LoadExchangeOneIntoDBService {
     public void getOracleTrades() {
         List<Oracle> data = exchangeOneOrderBookService.getOracleData()
                 .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
+                .filter(order -> order.quantity() > order.cumulatitiveQuantity())
                 .map(order -> new Oracle(
                         order.product(),
                         order.quantity(),
@@ -154,23 +174,6 @@ public class LoadExchangeOneIntoDBService {
         log.info("Cron job for ExchangeOne Oracle Orders Done!");
     }
 
-    @Scheduled(cron = "*/30 * * * * *")
-    public void getNetflixTrades() {
-        List<Netflix> data = exchangeOneOrderBookService.getNetflixData()
-                .parallelStream()
-                .filter(order -> order.quantity() > order.cumulativeQuantity())
-                .map(order -> new Netflix(
-                        order.product(),
-                        order.quantity(),
-                        order.price(),
-                        order.side(),
-                        order.orderType(),
-                        ExchangeUrls.ExchangeOneUrl.getUrl()))
-                .toList();
-        productRepositoryService.getNetflixRepository().deleteAllByExchangeUrl(ExchangeUrls.ExchangeOneUrl.getUrl());
-        productRepositoryService.getNetflixRepository().saveAll(data);
-        log.info("Cron job for ExchangeOne Netflix Orders Done!");
-    }
 
     @Scheduled(cron = "*/30 * * * * *")
     public void getMarketData() {
@@ -181,7 +184,7 @@ public class LoadExchangeOneIntoDBService {
                             .ticker(data.TICKER())
                             .sellLimit(data.SELL_LIMIT())
                             .lastTradedPrice(data.LAST_TRADED_PRICE())
-                            .maxPriceShift(data.MAX_PRICE())
+                            .maxPriceShift(data.MAX_PRICE_SHIFT())
                             .askPrice(data.ASK_PRICE())
                             .bidPrice(data.BID_PRICE())
                             .buyLimit(data.BUY_LIMIT())
