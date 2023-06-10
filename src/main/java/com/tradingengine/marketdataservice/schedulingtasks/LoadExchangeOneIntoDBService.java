@@ -181,7 +181,7 @@ public class LoadExchangeOneIntoDBService {
                             .ticker(data.TICKER())
                             .sellLimit(data.SELL_LIMIT())
                             .lastTradedPrice(data.LAST_TRADED_PRICE())
-                            .maxPriceShift(data.MAX_PRICE())
+                            .maxPriceShift(data.MAX_PRICE_SHIFT())
                             .askPrice(data.ASK_PRICE())
                             .bidPrice(data.BID_PRICE())
                             .buyLimit(data.BUY_LIMIT())
